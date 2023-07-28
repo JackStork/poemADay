@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: #453737;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -26,6 +29,112 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.Title {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  padding-bottom: 1px;
+}
+
+.TitleName {
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 100px;
+}
+
+.TitleDate {
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 100px;
+}
+
+.TitleLine {
+  background-color: #565050;
+  height: 2px;
+  width: 100%;
+  border: 0;
+}
+
+.PoemEntry {
+  min-height: 62vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 80px;
+  padding-bottom: 30px;
+}
+
+.PoemEntryDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.PoemEntryDetailsSubject {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 90px;
+}
+
+.PoemEntryDetailsForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.PoemEntryBox {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.PoemEntryDetailsSubjectSubject {
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+}
+
+.PoemEntryDetailsSubjectValue {
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 60px;
+}
+
+.PoemEntryDetailsFormForm {
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+}
+
+.PoemEntryDetailsFormValue {
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 60px;
+}
+
+.PoemEntryBoxSubmit {
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 25px;
+  background-color: #453737;
+  width: 50px;
+  border: none;
+}
+
+.PoemEntryBoxSubmit:hover {
+  background-color: #282c34;
+}
+
+.PoemEntryBoxBox {
+  min-height: 600px;
+  min-width: 500px;
+  resize: none;
+  outline: none;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
 }
 
 @keyframes App-logo-spin {
