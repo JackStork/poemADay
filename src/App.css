@@ -113,7 +113,7 @@
   font-size: 60px;
 }
 
-.PoemEntryBoxSubmit {
+.PoemEntryBoxBelowSubmit {
   display: flex;
   justify-content: center;
   color: #ffffff;
@@ -124,7 +124,7 @@
   border: none;
 }
 
-.PoemEntryBoxSubmit:hover {
+.PoemEntryBoxBelowSubmit:hover {
   background-color: #282c34;
 }
 
@@ -135,6 +135,14 @@
   outline: none;
   font-family: "Times New Roman", Times, serif;
   font-size: 20px;
+}
+
+.PoemEntryBoxBelow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 500px;
+  padding-top: 5px;
 }
 
 @keyframes App-logo-spin {
