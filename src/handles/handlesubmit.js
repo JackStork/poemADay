@@ -1,18 +1,17 @@
-import { addDoc, collection } from "@firebase/firestore";
+import { addDoc, setDoc, doc, collection } from "@firebase/firestore";
 import { firestore } from "../firebase_setup/firebase";
 
-const handleSubmit = (testdata) => {
-  const ref = collection(firestore, "test_data"); // Firebase creates this automatically
+async function handleSubmit(userData, poemData, dateData) {
+  const ref = collection(firestore, dateData);
 
-  let data = {
-    testData: testdata,
+  const data = {
+    poem: poemData,
   };
 
-  try {
-    addDoc(ref, data);
-  } catch (err) {
-    console.log(err);
-  }
-};
+  await setDoc(doc(firestore, dateData, userData), {
+    poem: poemData,
+    likes: 0,
+  });
+}
 
 export default handleSubmit;

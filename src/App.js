@@ -3,20 +3,29 @@ import React, { useState, useEffect, useRef } from "react";
 import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import handleSubmit from "./handles/handlesubmit";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import { app } from "./firebase_setup/firebase";
 
 // Get date to display next to title
 const date = new Date();
 let day = date.getDate();
-let month = date.getMonth();
+day = day < 10 ? "0" + day.toString() : day;
+let month = date.getMonth() + 1;
+month = month < 10 ? "0" + month.toString() : month;
 let year = date.getFullYear();
-let shortDate = `${day}/${month + 1}/${year}`;
+let shortDate = `${day}/${month}/${year}`;
 
 function App() {
   // Google login test stuff
-  const [user, setUser] = useState([]);
-  const [profile, setProfile] = useState(null);
-  const [userPoem, setUserPoem] = useState("");
+  const [user, setUser] = useState(null);
+  //const [profile, setProfile] = useState(null);
 
+  /*
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => setUser(codeResponse),
     onError: (error) => console.log("Login Failed:", error),
@@ -41,20 +50,54 @@ function App() {
         .catch((err) => console.log(err));
     }
   }, [user]);
+  
 
   const logOut = () => {
     googleLogout();
     setProfile(null);
     console.log("LOGGED OUT");
   };
+  */
 
-  // For firebase testing
+  // For firebase poem uploading
   const dataRef = useRef();
 
-  const submithandler = (e) => {
-    e.preventDefault();
-    handleSubmit("TEST");
+  const submithandler = () => {
+    console.log(dataRef.current.value);
+    handleSubmit(user.email, dataRef.current.value, `${day}${month}${year}`);
     dataRef.current.value = "";
+  };
+
+  // For Firebase authentication w Google
+  // NOTE: May not actually want Firebase auth on client side. May want a backend
+  // server for that purpose
+  const firebaseSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope("https://www.googleapis.com/auth/firebase");
+
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setUser(user);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  };
+
+  const firebaseSignOut = () => {
+    const auth = getAuth();
+    signOut(auth);
+    setUser(null);
   };
 
   return (
@@ -79,15 +122,15 @@ function App() {
           <textarea
             type="text"
             className="PoemEntryBoxBox"
-            id="PoemEntryBoxBox"
             ref={dataRef}
+            maxLength={10000}
             //onChange will be used for saving field value when refreshed
           />
           <div className="PoemEntryBoxBelow">
-            {profile ? (
-              <button onClick={() => logOut()}>Sign Out</button>
+            {user ? (
+              <button onClick={firebaseSignOut}>Sign Out</button>
             ) : (
-              <button onClick={() => login()}>Sign in with Google</button>
+              <button onClick={firebaseSignIn}>Sign in with Google</button>
             )}
             <button onClick={submithandler} className="PoemEntryBoxBelowSubmit">
               ✓
