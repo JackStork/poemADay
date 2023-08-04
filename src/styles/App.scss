@@ -1,34 +1,10 @@
+@use "_variables" as v;
+
 .App {
   text-align: center;
-  background-color: #453737;
+  background-color: v.$main-background-color;
   display: flex;
   flex-direction: column;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 .Title {
@@ -39,14 +15,14 @@
 }
 
 .TitleName {
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
   font-size: 100px;
 }
 
 .TitleDate {
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
   font-size: 100px;
 }
 
@@ -90,34 +66,34 @@
 }
 
 .PoemEntryDetailsSubjectSubject {
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
   font-size: 30px;
 }
 
 .PoemEntryDetailsSubjectValue {
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
   font-size: 60px;
 }
 
 .PoemEntryDetailsFormForm {
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
   font-size: 30px;
 }
 
 .PoemEntryDetailsFormValue {
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
   font-size: 60px;
 }
 
 .PoemEntryBoxBelowSubmit {
   display: flex;
   justify-content: center;
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
   font-size: 25px;
   background-color: #453737;
   width: 50px;
@@ -133,7 +109,7 @@
   min-width: 500px;
   resize: none;
   outline: none;
-  font-family: "Times New Roman", Times, serif;
+  font-family: v.$main-font-family;
   font-size: 20px;
 }
 
@@ -143,13 +119,4 @@
   justify-content: space-between;
   width: 500px;
   padding-top: 5px;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

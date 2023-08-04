@@ -1,0 +1,17 @@
+.YourPost {
+  background-color: #453737;
+  display: flex;
+  flex-direction: column;
+}
+
+.YourPostAuthor {
+  display: flex;
+  flex-direction: row;
+}
+
+.YourPostAuthorText {
+  min-height: 300px;
+  color: #ffffff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+}

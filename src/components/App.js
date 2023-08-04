@@ -1,15 +1,15 @@
-import "./App.css";
+import "../styles/App.scss";
 import React, { useState, useEffect, useRef } from "react";
-import { googleLogout, useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
-import handleSubmit from "./handles/handlesubmit";
+//import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+//import axios from "axios";
+import handleSubmit from "../handles/handlesubmit";
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { app } from "./firebase_setup/firebase";
+import YourPost from "./YourPost";
 
 // Get date to display next to title
 const date = new Date();
@@ -22,8 +22,13 @@ let shortDate = `${day}/${month}/${year}`;
 
 function App() {
   // Google login test stuff
-  const [user, setUser] = useState(null);
   //const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState(null);
+
+  const tempData = {
+    poem: "THIS IS A\nTEST",
+    likes: 1,
+  };
 
   /*
   const login = useGoogleLogin({
@@ -139,7 +144,9 @@ function App() {
         </div>
       </div>
       <hr className="TitleLine" />
-      <div className="Posts"></div>
+      <div className="Posts">
+        <YourPost postData={tempData} />
+      </div>
     </div>
   );
 }
