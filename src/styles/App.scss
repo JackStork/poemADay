@@ -95,9 +95,10 @@
   color: v.$main-font-color;
   font-family: v.$main-font-family;
   font-size: 25px;
-  background-color: #453737;
+  background-color: v.$main-background-color;
   width: 50px;
   border: none;
+  border-radius: 5px;
 }
 
 .PoemEntryBoxBelowSubmit:hover {

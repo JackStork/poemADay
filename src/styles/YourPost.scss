@@ -1,17 +1,64 @@
+@use "_variables" as v;
+
+$poem-area-width: 60vw;
+
 .YourPost {
-  background-color: #453737;
+  background-color: v.$main-background-color;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  min-height: 300px;
 }
 
 .YourPostAuthor {
   display: flex;
-  flex-direction: row;
+  width: 95vw;
 }
 
 .YourPostAuthorText {
-  min-height: 300px;
-  color: #ffffff;
-  font-family: "Times New Roman", Times, serif;
+  color: #a4a1a1;
+  font-family: v.$main-font-family;
   font-size: 30px;
+  padding: 20px;
+}
+
+.YourPostContent {
+  display: flex;
+  flex-direction: column;
+  width: $poem-area-width;
+  align-items: start;
+}
+
+.YourPostContentPoem {
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
+  white-space: pre;
+  text-align: start;
+  min-height: 200px;
+}
+
+.YourPostContentBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  width: $poem-area-width;
+}
+
+.YourPostContentBarLike {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: v.$main-font-color;
+  font-family: v.$main-font-family;
+  font-size: 20px;
+  background-color: v.$main-background-color;
+  width: 50px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+}
+
+.YourPostContentBarLikeImage {
+  height: 25px;
+  width: 25px;
 }

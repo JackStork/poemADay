@@ -1,13 +1,14 @@
 import { addDoc, setDoc, doc, collection } from "@firebase/firestore";
 import { firestore } from "../firebase_setup/firebase";
 
-async function handleSubmit(userData, poemData, dateData) {
+// For submitting poems to Firestore
+async function submitPoemHandle(userData, poemData, dateData) {
   const ref = collection(firestore, dateData);
 
   await setDoc(doc(firestore, dateData, userData), {
     poem: poemData,
-    likes: 0,
+    likes: 1,
   });
 }
 
-export default handleSubmit;
+export default submitPoemHandle;

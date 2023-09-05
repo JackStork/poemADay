@@ -1,8 +1,6 @@
 import "../styles/App.scss";
 import React, { useState, useEffect, useRef } from "react";
-//import { googleLogout, useGoogleLogin } from "@react-oauth/google";
-//import axios from "axios";
-import handleSubmit from "../handles/handlesubmit";
+import submitPoemHandle from "../handles/handlesubmit";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -10,66 +8,25 @@ import {
   signOut,
 } from "firebase/auth";
 import YourPost from "./YourPost";
-
-// Get date to display next to title
-const date = new Date();
-let day = date.getDate();
-day = day < 10 ? "0" + day.toString() : day;
-let month = date.getMonth() + 1;
-month = month < 10 ? "0" + month.toString() : month;
-let year = date.getFullYear();
-let shortDate = `${day}/${month}/${year}`;
+import displayDate from "../utils/displayDate";
+import { useSelector, useDispatch } from "react-redux";
+import { update } from "../userSlice";
+import { firebaseSignIn, firebaseSignOut } from "../utils/firebaseSignInOut";
 
 function App() {
-  // Google login test stuff
-  //const [profile, setProfile] = useState(null);
-  const [user, setUser] = useState(null);
-
-  const tempData = {
-    poem: "THIS IS A\nTEST",
-    likes: 1,
-  };
-
   /*
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
-    onError: (error) => console.log("Login Failed:", error),
-  });
-
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.access_token}`,
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          setProfile(res.data);
-          console.log("LOGGED IN");
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [user]);
-  
-
-  const logOut = () => {
-    googleLogout();
-    setProfile(null);
-    console.log("LOGGED OUT");
-  };
+  const [user, setUser] = useState(null);
   */
+  // Redux testing
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
 
   // For firebase poem uploading
   const dataRef = useRef();
 
-  const submithandler = () => {
+  const submitPoem = () => {
     console.log(dataRef.current.value);
-    handleSubmit(user.email, dataRef.current.value, `${day}${month}${year}`);
+    submitPoemHandle(user.email, dataRef.current.value, displayDate());
     dataRef.current.value = "";
   };
 
@@ -85,7 +42,7 @@ function App() {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setUser(user);
+        dispatch(update(user));
       })
       .catch((error) => {
         // Handle Errors here.
@@ -102,14 +59,14 @@ function App() {
   const firebaseSignOut = () => {
     const auth = getAuth();
     signOut(auth);
-    setUser(null);
+    dispatch(update(user));
   };
 
   return (
     <div className="App">
       <div className="Title">
         <text className="TitleName">Poem a Day</text>
-        <text className="TitleDate">{shortDate}</text>
+        <text className="TitleDate">{displayDate()}</text>
       </div>
       <hr className="TitleLine" />
       <div className="PoemEntry">
@@ -137,7 +94,7 @@ function App() {
             ) : (
               <button onClick={firebaseSignIn}>Sign in with Google</button>
             )}
-            <button onClick={submithandler} className="PoemEntryBoxBelowSubmit">
+            <button onClick={submitPoem} className="PoemEntryBoxBelowSubmit">
               ✓
             </button>
           </div>
@@ -145,7 +102,11 @@ function App() {
       </div>
       <hr className="TitleLine" />
       <div className="Posts">
-        <YourPost postData={tempData} />
+        {user ? (
+          <YourPost postData={{ poem: "THIS IS A\nTEST", likes: 1 }} />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
